@@ -37,7 +37,7 @@ const options = ref([{
 }])
 var songs: any = []
 var lvfit: any = []
-const achievemnts = [0, 10, 20, 30, 40, 50, 60, 70, 75, 80, 90, 94, 97, 98, 99, 99.5, 100, 100.5]
+const achievemnts = [0, 10, 20, 30, 40, 50, 60, 70, 75, 80, 90, 94, 97, 98, 99, 99.5, 100, 100.5, 101]
 const dxk = [0, 1.6, 3.2, 4.8, 6.4, 8, 9.6, 11.2, 12.0, 12.8, 13.6, 16.8, 20, 20.3, 20.8, 21.1, 21.6, 22.4]
 const b15table = ref([])
 const b35table = ref([])
@@ -93,7 +93,7 @@ const computerating = (achieve: number, lv: number) => {
       break;
     }
   }
-  return Math.floor(achieve * dxk[index] * lv * 0.01)
+  return Math.floor(achieve * dxk[index - 1] * lv * 0.01)
 }
 
 const getmusicinfo = (id: number) => {
@@ -143,19 +143,19 @@ const compute = async () => {
       bestold.push({ ...info, ...{ 'dxra': ra }, ...scores[i] })
     }
   }
-  bestnew = [...new Set(bestnew)] 
-  bestold = [...new Set(bestold)] 
+  bestnew = [...new Set(bestnew)]
+  bestold = [...new Set(bestold)]
   bestnew.sort((a, b) => b.dxra - a.dxra);
   bestold.sort((a, b) => b.dxra - a.dxra);
   console.log(bestnew)
   console.log(bestold)
   for (let index = 0; index < 15; index++) {
     b15.value = b15.value + bestnew[index].dxra;
-    (b15table.value as any).push({ "no": index+1, "name": bestnew[index].title, "dxra": bestnew[index].dxra, "fit": (bestnew[index].lvfit[bestnew[index].level_index].fit_diff).toFixed(2), "ac": bestnew[index].achievements })
+    (b15table.value as any).push({ "no": index + 1, "name": bestnew[index].title, "dxra": bestnew[index].dxra, "fit": (bestnew[index].lvfit[bestnew[index].level_index].fit_diff).toFixed(2), "ac": bestnew[index].achievements })
   }
   for (let index = 0; index < 35; index++) {
     b35.value = b35.value + bestold[index].dxra;
-    (b35table.value as any).push({ "no": index+1, "name": bestold[index].title, "dxra": bestold[index].dxra, "fit": (bestold[index].lvfit[bestold[index].level_index].fit_diff).toFixed(2), "ac": bestold[index].achievements })
+    (b35table.value as any).push({ "no": index + 1, "name": bestold[index].title, "dxra": bestold[index].dxra, "fit": (bestold[index].lvfit[bestold[index].level_index].fit_diff).toFixed(2), "ac": bestold[index].achievements })
   }
 }
 
