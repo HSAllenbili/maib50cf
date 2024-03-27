@@ -132,6 +132,10 @@ const getScores = async () => {
 }
 
 const compute = async () => {
+  b15.value = 0
+  b35.value = 0
+  b15table.value = []
+  b35table.value = []
   var scores = await getScores();
   var bestold = []
   var bestnew = []
