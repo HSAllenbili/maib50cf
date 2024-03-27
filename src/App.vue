@@ -68,20 +68,15 @@ var plate_to_version = {
   '檄': 'maimai GreeN PLUS',
   '橙': 'maimai ORANGE',
   '暁': 'maimai ORANGE PLUS',
-  '晓': 'maimai ORANGE PLUS',
   '桃': 'maimai PiNK',
   '櫻': 'maimai PiNK PLUS',
-  '樱': 'maimai PiNK PLUS',
   '紫': 'maimai MURASAKi',
   '菫': 'maimai MURASAKi PLUS',
-  '堇': 'maimai MURASAKi PLUS',
   '白': 'maimai MiLK',
   '雪': 'MiLK PLUS',
   '輝': 'maimai FiNALE',
-  '辉': 'maimai FiNALE',
   '熊': 'maimai でらっくす',
   '華': 'maimai でらっくす PLUS',
-  '华': 'maimai でらっくす PLUS',
   '爽': 'maimai でらっくす Splash',
   '煌': 'maimai でらっくす Splash PLUS',
   '宙': 'maimai でらっくす UNiVERSE',
@@ -148,17 +143,19 @@ const compute = async () => {
       bestold.push({ ...info, ...{ 'dxra': ra }, ...scores[i] })
     }
   }
+  bestnew = [...new Set(bestnew)] 
+  bestold = [...new Set(bestold)] 
   bestnew.sort((a, b) => b.dxra - a.dxra);
   bestold.sort((a, b) => b.dxra - a.dxra);
   console.log(bestnew)
   console.log(bestold)
   for (let index = 0; index < 15; index++) {
     b15.value = b15.value + bestnew[index].dxra;
-    (b15table.value as any).push({ "no": index+1, "name": bestnew[index].title, "dxra": bestnew[index].dxra, "fit": Math.floor(bestnew[index].lvfit[bestnew[index].level_index].fit_diff), "ac": bestnew[index].achievements })
+    (b15table.value as any).push({ "no": index+1, "name": bestnew[index].title, "dxra": bestnew[index].dxra, "fit": (bestnew[index].lvfit[bestnew[index].level_index].fit_diff).toFixed(2), "ac": bestnew[index].achievements })
   }
   for (let index = 0; index < 35; index++) {
     b35.value = b35.value + bestold[index].dxra;
-    (b35table.value as any).push({ "no": index+1, "name": bestold[index].title, "dxra": bestold[index].dxra, "fit": Math.floor(bestold[index].lvfit[bestold[index].level_index].fit_diff), "ac": bestold[index].achievements })
+    (b35table.value as any).push({ "no": index+1, "name": bestold[index].title, "dxra": bestold[index].dxra, "fit": (bestold[index].lvfit[bestold[index].level_index].fit_diff).toFixed(2), "ac": bestold[index].achievements })
   }
 }
 
