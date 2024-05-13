@@ -136,6 +136,7 @@ const compute = async () => {
   var bestnew = []
   for (let i in scores) {
     var info = getmusicinfo(scores[i].id)
+    if(info.lvfit == undefined) continue;
     var ra = computerating(scores[i].achievements, info.lvfit[(scores[i].level_index)].fit_diff)
     if (info.basic_info.is_new) {
       bestnew.push({ ...info, ...{ 'dxra': ra }, ...scores[i] })
